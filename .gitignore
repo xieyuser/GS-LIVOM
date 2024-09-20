@@ -1,2 +1,7 @@
 output/*
+.vscode/settings.json
+
+include/*
+src/*
+
 !.gitignore
