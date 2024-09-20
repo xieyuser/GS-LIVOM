@@ -1,0 +1,35 @@
+common:
+    lidar_topic:  "/hesai/pandar"
+    imu_topic:  "/imu/data_raw"
+    image_topic:  "/camera1/image_color/compressed"
+    image_type:  COMPRESSED    # 1 RGB8   2 COMPRESSED
+    gravity_acc: [ 0.0, 0.0, 9.78 ]
+    
+lidar_parameter:
+    lidar_type: 5                # 1 for Livox serials LiDAR, 2 for Velodyne LiDAR, 3 for ouster LiDAR,  4 for Robosense LiDAR, 5 for HESAI-Pandar LiDAR
+    N_SCANS: 6
+    SCAN_RATE: 10                # only need to be set for velodyne, unit: Hz,
+    time_unit: 3            # the unit of time/t field in the PointCloud2 rostopic: 0-second, 1-milisecond, 2-microsecond, 3-nanosecond.
+
+imu_parameter:
+    acc_cov: 0.001
+    gyr_cov: 0.001
+    b_acc_cov: 0.0001
+    b_gyr_cov: 0.0001
+    time_diff_enable: false
+    
+camera_parameter:
+    image_width: 720
+    image_height: 540
+    image_resize_ratio: 1
+    camera_intrinsic: [ 375.2070213734975, 0.0, 357.07419933032327,
+                        0.0, 375.2464869561453, 289.17016196288796,
+                        0.0, 0.0, 1.0 ]
+    camera_dist_coeffs: [  -0.07604411701569498 ,0.05659321616080836, -0.17959339575616834, 0.1475193667811729]  #k1, k2, p1, p2, k3
+
+extrinsic_parameter:
+    extrinsic_enable:  false      # true: enable the online estimation of IMU-LiDAR extrinsic,
+    extrinsic_t_imu_lidar: [ 0.070478, -0.006242, 0.107762 ]
+    extrinsic_R_imu_lidar: [0.999926, -0.007594, -0.009503, 0.007560, 0.999965, -0.003615, 0.009530, 0.003543, 0.999948,]
+    extrinsic_t_imu_camera: [-0.026570350000000006, -0.20644875000000001, -0.04389180000000001]
+    extrinsic_R_imu_camera: [ -0.007594, 0.009503, -0.999926, 0.999965, 0.003615, -0.00756, 0.003543, -0.999948, -0.00953]

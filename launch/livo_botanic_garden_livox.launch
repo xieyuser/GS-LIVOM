@@ -1,0 +1,24 @@
+<launch>
+  <!-- Launch file for velodyne16 VLP-16 LiDAR -->
+    <rosparam command="load" file="$(find gslivom)/config/botanic_garden_livox.yaml" />
+    <rosparam command="load" file="$(find gslivom)/config/basic_common.yaml" />
+
+    <param name="debug_output" type="bool" value="0"/>
+    <param name="output_path" type="string" value="$(find gslivom)/output"/>
+    <node pkg="gslivom" type="livo_node" name="livo_node" output="screen" /> 
+
+    <!-- <arg name="bag_path" value="-s 20 /home/xieys/Downloads/bags/botanic/1005_00_img10hz600p.bag" /> -->
+    <!-- <arg name="bag_path" value="-s 40 /home/xieys/Downloads/bags/botanic/1005_01_img10hz600p.bag" /> -->
+    <!-- <arg name="bag_path" value="-s 18 /home/xieys/Downloads/bags/botanic/1005_07_img10hz600p.bag" /> -->
+    <!-- <arg name="bag_path" value="-s 25 /home/xieys/Downloads/bags/botanic/1006_01_img10hz600p.bag" /> -->
+    <!-- <arg name="bag_path" value="-s 30 /home/xieys/Downloads/bags/botanic/1008_03_img10hz600p.bag" /> -->
+    <!-- <arg name="bag_path" value="-s 20 /home/xieys/Downloads/bags/botanic/1018_00_img10hz600p.bag" /> -->
+    <arg name="bag_path" value="-s 25 /home/xieys/Downloads/bags/botanic/1018_13_img10hz600p.bag" />
+
+    <node pkg="rosbag" type="play" name="player" output="screen" args="-q -d 3 $(arg bag_path)"/>
+    
+    <param name="bag_path" value="$(arg bag_path)"/>
+    <node pkg="gslivom" name="odom_listener" type="listen_odom.py"  output="screen" />
+</launch>
+
+

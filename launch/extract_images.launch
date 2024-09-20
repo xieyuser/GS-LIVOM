@@ -1,0 +1,6 @@
+<launch>
+  <node name="extract" pkg="image_view" type="extract_images" respawn="false" required="true" output="screen" cwd="ROS_HOME">
+    <remap from="image" to="/camera/image_raw"/>
+  </node>
+  <node pkg="image_transport" type="republish" name="republish" args="compressed in:=/camera/image_color raw out:=/camera/image_raw" output="screen" respawn="true"/>
+</launch>

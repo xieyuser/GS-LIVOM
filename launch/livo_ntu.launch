@@ -1,0 +1,21 @@
+<launch>
+  <!-- Launch file for velodyne16 VLP-16 LiDAR -->
+    <rosparam command="load" file="$(find gslivom)/config/ntu.yaml" />
+    <rosparam command="load" file="$(find gslivom)/config/basic_common.yaml" />
+
+    <param name="debug_output" type="bool" value="0"/>
+    <param name="output_path" type="string" value="$(find gslivom)/output"/>
+    <node pkg="gslivom" type="livo_node" name="livo_node" output="screen" /> 
+
+    <!-- <arg name="bag_path" value="-s 10 /home/xieys/Downloads/bags/ntu/eee_03.bag" /> -->
+    <arg name="bag_path" value="-s 10 /home/xieys/Downloads/bags/ntu/eee_02/eee_02.bag" />
+    <!-- <arg name="bag_path" value="-s 1 /home/xieys/Downloads/bags/ntu/nya_01/nya_01.bag" /> -->
+    <!-- <arg name="bag_path" value="-s 20 /home/xieys/Downloads/bags/ntu/sbs_01/sbs_01.bag" /> -->
+
+    <node pkg="rosbag" type="play" name="player" output="screen" args="-q -d 3 $(arg bag_path)"/>
+    
+    <param name="bag_path" value="$(arg bag_path)"/>
+    <node pkg="gslivom" name="odom_listener" type="listen_odom.py"  output="screen" />
+</launch>
+
+
