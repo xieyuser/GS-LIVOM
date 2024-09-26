@@ -24,6 +24,11 @@ The system takes input from point cloud data collected by LiDAR, motion informat
 ## Images & Demo Video (2024-10-01 Update)
 
 <div align="center">
+<img src="./doc/demo.png" width=80.0% />
+</div>
+
+
+<div align="center">
 <img src="./doc/render-all.png" width=80.0% />
 </div>
 
@@ -41,7 +46,7 @@ Demo video will be released soon.
 
 ## 2. Prerequisites
 
-The equipment of this repository is as follows. And this repo contains **<u>CPP</u>**, **<u>TorchLib</u>** and **<u>ROS</u>**, so maybe it's a little difficult to install. If you are not familiar with the following steps, you can refer to the video of environment deploy [Youtube](https://youtu.be/acTHQIK4QIs?si=oPEd01YCcR_YdLne) in and [Bilibili](https://www.bilibili.com/video/BV1qPx5eoELm/?vd_source=0211af3bb655d5627b96e8718e3af59f).
+The equipment of this repository is as follows. And this repo contains **<u>CPP</u>**, **<u>TorchLib</u>** and **<u>ROS</u>** in **<u>conda</u>**, so maybe it's a little difficult to install. If you are not familiar with the following steps, you can refer to the video of environment deploy [Youtube](https://youtu.be/acTHQIK4QIs?si=oPEd01YCcR_YdLne) in and [Bilibili](https://www.bilibili.com/video/BV1qPx5eoELm/?vd_source=0211af3bb655d5627b96e8718e3af59f).
 
 2.1 Ubuntu and ROS. 
 
@@ -185,8 +190,8 @@ Please refer to [Gaussian-Splatting-Cuda](https://github.com/MrNeRF/gaussian-spl
 ## Acknowledgments
 
 Thanks for [RoboStack](https://robostack.github.io/GettingStarted.html), [3D Gaussian Splatting](https://github.com/graphdeco-inria/gaussian-splatting), [Gaussian-Splatting-Cuda](https://github.com/MrNeRF/gaussian-splatting-cuda), [depth-diff-gaussian-rasterization
-](https://github.com/ingra14m/depth-diff-gaussian-rasterization), [R3LIVE](https://github.com/hku-mars/r3live), [CT-ICP](https://github.com/jedeschaud/ct_icp), [Fast-LIO](https://github.com/hku-mars/FAST_LIO) and [Open-VINs](https://github.com/rpng/open_vins).
+](https://github.com/ingra14m/depth-diff-gaussian-rasterization), [R3LIVE](https://github.com/hku-mars/r3live), [CT-ICP](https://github.com/jedeschaud/ct_icp), [Fast-LIO](https://github.com/hku-mars/FAST_LIO) and [Open-VINS](https://github.com/rpng/open_vins).
 
 
 ## License
-The source code of this package is released under GPLv2 license. We only allow it free for academic usage. For any technical issues, please fell free to contact yxie827@connect.hkust-gz.edu.cn.
+The source code of this package is released under GPLv2 license. We only allow it free for academic usage. For any technical issues, please feel free to contact yxie827@connect.hkust-gz.edu.cn.
