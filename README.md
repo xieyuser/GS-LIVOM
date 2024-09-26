@@ -1,4 +1,4 @@
-# GS-LIVOM: Real-time Gaussian Spaltting Assisted LiDAR-Inertial-Visual Odometry and Dense Mapping
+# GS-LIVOM: Real-time Gaussian Splatting Assisted LiDAR-Inertial-Visual Odometry and Dense Mapping
 
 ## Features
 
@@ -35,12 +35,13 @@ The system takes input from point cloud data collected by LiDAR, motion informat
 <img src="./doc/hkucampus.gif" width=80.0% />
 </div>
 
-You can find the demo video [here](https://www.youtube.com/watch?v=j9Kne47aS_0&t=76s).
+<!-- You can find the demo video [here](https://www.youtube.com/watch?v=j9Kne47aS_0&t=76s). -->
 
+Demo video will be released soon.
 
 ## 2. Prerequisites
 
-The equipment of this repository is as follows. And this repo contains **<u>CPP</u>**, **<u>TorchLib</u>** and **<u>ROS</u>**, so maybe it's a little difficult to install. If you are not familiar with the following steps, you can refer to [this video](https://www.youtube.com/watch?v=j9Kne47aS_0&t=76s).
+The equipment of this repository is as follows. And this repo contains **<u>CPP</u>**, **<u>TorchLib</u>** and **<u>ROS</u>**, so maybe it's a little difficult to install. If you are not familiar with the following steps, you can refer to the video of environment deploy [Youtube](https://youtu.be/acTHQIK4QIs?si=oPEd01YCcR_YdLne) in and [Bilibili](https://www.bilibili.com/video/BV1qPx5eoELm/?vd_source=0211af3bb655d5627b96e8718e3af59f).
 
 2.1 Ubuntu and ROS. 
 
@@ -86,7 +87,7 @@ cd livox_ros_driver2
 mamba search pytorch=2.0.1
 
 # Please find appropriate version of torch in different channels
-mamba install pytorch=2.0.1 -c pytorch -c nvidia -c conda-forge
+mamba install pytorch=2.0.1 -c conda-forge
 ```
 
 2.4 Some packages can be installed by:
@@ -168,7 +169,7 @@ roslaunch gslivom livo_fastlivo.launch
 
 ###  4). Run on [*Botanic Garden Dataset*](https://github.com/robot-pesg/BotanicGarden)
 
-Please go to the workspace of **SR-LIVO** and type:
+Please go to the workspace of **GS-LIVOM** and type:
 
 ```bash
 # for Velodyne VLP-16
@@ -177,6 +178,9 @@ roslaunch gslivom livo_botanic_garden.launch
 # for Livox-Avia
 roslaunch gslivom livo_botanic_garden_livox.launch
 ```
+
+## 5.Visualization
+Please refer to [Gaussian-Splatting-Cuda](https://github.com/MrNeRF/gaussian-splatting-cuda) to build SIBR_viewer to visualize the 3D gaussian model. Certainly it can be built in the same conda environment. I have installed the dependencies (cos7) in *conda_pkgs.txt*.
 
 ## Acknowledgments
 
