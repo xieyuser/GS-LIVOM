@@ -124,11 +124,11 @@ fi" >> ~/miniforge3/envs/{ENV_NAME}/setup.sh
 ## 4.Run on Public Datasets
 
 ```Bash
-# change the path in  line 40 of /home/xieys/catkin_ws/src/GS-LIVOM/include/gs/gs/parameters.cuh
+# Noted: change the path in  line 40 of /home/xieys/catkin_ws/src/GS-LIVOM/include/gs/gs/parameters.cuh
 std::filesystem::path output_path = "/home/xieys/catkin_ws/output";
 ```
 
-Noted:
+
 
 ###  1). Run on [*R3Live_Dataset*](https://github.com/ziv-lin/r3live_dataset)
 
@@ -163,7 +163,7 @@ roslaunch gslivom livo_ntu.launch
 
 
 ```bash
-roslaunch gslivom livo_ntu.launch
+roslaunch gslivom livo_fastlivo.launch
 ```
 
 ###  4). Run on [*Botanic Garden Dataset*](https://github.com/robot-pesg/BotanicGarden)
