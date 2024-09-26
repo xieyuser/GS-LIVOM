@@ -66,7 +66,6 @@ if(USE_LIVOX)
 endif(USE_LIVOX)
 
 
-find_package(cnpy)
 find_package(TBB REQUIRED)
 find_package(Threads REQUIRED)
 find_package(OpenMP REQUIRED)

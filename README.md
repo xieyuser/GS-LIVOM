@@ -14,17 +14,7 @@ E. Easy-to-use. ROS-related code is provided. Any bags contains image, LiDAR poi
 
 
 ## 1.Overview and Contributions (2024-10-01 Update)
-The system takes input from point cloud data collected
-by LiDAR, motion information collected by an Inertial Measure-
-ment Unit (IMU), and color and texture information captured by
-a camera. In the tracking thread, the ESIKF algorithm is used for
-tracking, achieving odometry output at the IMU frequency. In the
-mapping thread, the rendered color point cloud is used for Voxel-
-GPR, and then the data initialized 3D gaussian is input into the
-dense 3D gaussian map for rendering optimization. The final out-
-put is a high-quality dense 3D gaussian map. C, D, and S represent
-the rasterized color image, depth image, and silhouette image, re-
-spectively.
+The system takes input from point cloud data collected by LiDAR, motion information collected by an Inertial Measurement Unit (IMU), and color and texture information captured by a camera. In the tracking thread, the ESIKF algorithm is used for tracking, achieving odometry output at the IMU frequency. In the mapping thread, the rendered color point cloud is used for Voxel-GPR, and then the data initialized 3D gaussian is input into the dense 3D gaussian map for rendering optimization. The final output is a high-quality dense 3D gaussian map. C, D, and S represent the rasterized color image, depth image, and silhouette image, respectively.
 
 <div align="center">
 <img src="./doc/overview.png" width=80.0% />
@@ -48,8 +38,6 @@ spectively.
 You can find the demo video [here](https://www.youtube.com/watch?v=j9Kne47aS_0&t=76s).
 
 
-
-
 ## 2. Prerequisites
 
 The equipment of this repository is as follows. And this repo contains **<u>CPP</u>**, **<u>TorchLib</u>** and **<u>ROS</u>**, so maybe it's a little difficult to install. If you are not familiar with the following steps, you can refer to [this video](https://www.youtube.com/watch?v=j9Kne47aS_0&t=76s).
@@ -58,53 +46,76 @@ The equipment of this repository is as follows. And this repo contains **<u>CPP<
 
 We build this repo by [RoboStack](https://robostack.github.io/). You can install different ROS distributions in **Conda Environment** via [RoboStack Installation](https://robostack.github.io/). Source code has been tested in **ROS Noetic**. Building in **conda** may be more difficult, but the ability to isolate the environment is worth doing so.
 
-2.2 Some packages can be installed by:
-``` Bash
-    # create env
-    mamba create -n {ENV_NAME} python=3.9
-    mamba activate {ENV_NAME}
-
-    # install ros
-    mamba install ros-noetic-desktop-full -c RoboStack
-
-    # install other packages
-    mamba install --file conda_pkgs.txt
-```
-
-2.3 (Optional) Build Livox-SDK2 & livox_ros_driver2 in conda
+2.2 (Optional) Build Livox-SDK2 & livox_ros_driver2 in conda
 ``` bash
     # download
+    mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src
+    
+    cd ~/catkin_ws/src
     git clone https://github.com/Livox-SDK/Livox-SDK2
-    cd Livox-SDK2 && mkdir build && ca build
+    cd Livox-SDK2 && mkdir build && cd build
 
     # cmake options, -DCMAKE_INSTALL_PREFIX is path of your conda environment
     cmake -DCMAKE_INSTALL_PREFIX=/home/xieys/miniforge3/envs/{ENV_NAME}  ..
 
     # make && make install
-    make -j60
-    make install
+    make -j60 && make install
+
+    #clone livox_ros_driver2 and put it in your catkin_ws/src. If you don not use Livox, you can skip this step by changing -DBUILD_LIVOX=OFF in CMakeLists.txt
+    cd ~/catkin_ws/src
+    git clone https://github.com/Livox-SDK/livox_ros_driver2
+    
+    cd livox_ros_driver2
+
+    (Important)(****NOTE, I have chaned the source code in livox_ros_driver2/CMakeLists.txt to support build. Please refer to my video in this operation.)
+
+    ./build.sh ROS1
+```
+
+2.3 (Important) Install Torch
+``` Bash
+    mamba search pytorch=2.0.1
+
+    # Please find appropriate version of torch in different channels
+    mamba install pytorch=2.0.1=gpu_cuda118py39he342708_0 cudatoolkit=11.8 -c nvidia -c conda-forge
+```
+
+2.4 Some packages can be installed by:
+``` Bash
+    mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src
+
+    # clone
+    git clone https://github.com/xieyuser/GS-LIVOM.git
+    
+    # create env
+    mamba create -n {ENV_NAME} python=3.9
+    mamba activate {ENV_NAME}
+
+    # install ros in conda
+    mamba install ros-noetic-desktop-full -c RoboStack
+
+    # install other packages
+    cd GS-LIVOM
+    mamba install --file conda_pkgs.txt
 ```
 
 ## 3. Build GS-LIVOM and Source
 Clone the repository and catkin_make:
 ``` Bash
-    # cloud
-    mkdir -p ~/catkin_ws/src
-    git clone https://github.com/xieyuser/GS-LIVOM.git
-    
-    # (optional) clone livox_ros_driver2 and put it in your catkin_ws/src. If you don not use Livox, you can skip this step by changing -DBUILD_LIVOX=OFF in CMakeLists.txt
-    git clone https://github.com/Livox-SDK/livox_ros_driver2
-
     # build
-    cd ../
+    cd ~/catkin_ws
     catkin build   # change some DEFINITIONS
 
     # source
-    # temporary
+    # (either) temporary
     source ~/catkin_ws/devel/setup.bash
 
-    # start with conda activate
-    echo "source ~/catkin_ws/devel/setup.bash" >> ~/miniforge3/envs/{ENV_NAME}/setup.sh
+    # (or) start with conda activate
+    echo "ROS_FILE=/home/xieys/catkin_ws/devel/setup.bash
+    if [ -f \"\$ROS_FILE\" ]; then
+        echo \$ROS_FILE
+        source \$ROS_FILE
+    fi" >> ~/miniforge3/envs/{ENV_NAME}/setup.sh
 ```
 
 
@@ -120,6 +131,13 @@ Before running, please type the following command to examine the image message t
 rosbag info SEQUENCE_NAME.bag
 ```
 
+If the image message type is **sensor_msgs/CompressedImage**, please type:
+
+```bash
+# for compressed image sensor type
+roslaunch gslivom livo_r3live_compressed.launch
+```
+
 If the image message type is **sensor_msgs/Image**, please type:
 
 ```bash
@@ -127,12 +145,6 @@ If the image message type is **sensor_msgs/Image**, please type:
 roslaunch gslivom livo_r3live.launch
 ```
 
-If the image message type is **sensor_msgs/CompressedImage**, please type:
-
-```bash
-# for compressed image sensor type
-roslaunch gslivom livo_r3live_compressed.launch
-```
 
 ###  2). Run on [*NTU_VIRAL*](https://ntu-aris.github.io/ntu_viral_dataset/)
 

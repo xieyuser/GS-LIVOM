@@ -7,13 +7,13 @@
     <param name="output_path" type="string" value="$(find gslivom)/output"/>
     <node pkg="gslivom" type="livo_node" name="livo_node" output="screen" /> 
 
-    <!-- <arg name="bag_path" value="/home/xieys/Downloads/bags/r3live/hku_campus_seq_00.bag" /> -->
+    <arg name="bag_path" value="/home/xieys/Downloads/bags/r3live/hku_campus_seq_00.bag" />
     <!-- <arg name="bag_path" value="/home/xieys/Downloads/bags/r3live/hku_campus_seq_01.bag" /> -->
     <!-- <arg name="bag_path" value="/home/xieys/Downloads/bags/r3live/hku_campus_seq_02.bag" /> -->
     <!-- <arg name="bag_path" value="/home/xieys/Downloads/bags/r3live/hkust_campus_00.bag" /> -->
     <!-- <arg name="bag_path" value="/home/xieys/Downloads/bags/r3live/hkust_campus_01.bag" /> -->
     <!-- <arg name="bag_path" value="/home/xieys/Downloads/bags/r3live/hkust_campus_02.bag" /> -->
-    <arg name="bag_path" value="/home/xieys/Downloads/bags/r3live/hkust_campus_03.bag" />
+    <!-- <arg name="bag_path" value="/home/xieys/Downloads/bags/r3live/hkust_campus_03.bag" /> -->
     <!-- <arg name="bag_path" value="/home/xieys/Downloads/bags/r3live/hku_park_00.bag" /> -->
     <!-- <arg name="bag_path" value="/home/xieys/Downloads/bags/r3live/hku_main_building.bag" /> -->
     <!-- <arg name="bag_path" value="/home/xieys/Downloads/bags/r3live/hku_park_01.bag" /> -->
