@@ -79,7 +79,7 @@ gp3d:
 
     grid: 0.2
     min_points_num_to_gp: 10
-    num_gp_side: 2
+    num_gp_side: 4
     log_time: false
     debug: false
     neighbour_size: 3
@@ -90,6 +90,6 @@ gp3d:
     variance_sensor: 0.05
     kernel_size: 1
 
-    image_sliding_window: 5
+    image_sliding_window: 50
     curr_cam_per_iter: 1
     history_cam_per_iter: 1

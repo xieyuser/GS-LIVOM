@@ -46,80 +46,87 @@ The equipment of this repository is as follows. And this repo contains **<u>CPP<
 
 We build this repo by [RoboStack](https://robostack.github.io/). You can install different ROS distributions in **Conda Environment** via [RoboStack Installation](https://robostack.github.io/). Source code has been tested in **ROS Noetic**. Building in **conda** may be more difficult, but the ability to isolate the environment is worth doing so.
 
+2.2 Create conda environment
+``` Bash
+# create env
+mamba create -n {ENV_NAME} python=3.9
+mamba activate {ENV_NAME}
+
+# install ros in conda
+mamba install ros-noetic-desktop-full -c RoboStack
+```
+
 2.2 (Optional) Build Livox-SDK2 & livox_ros_driver2 in conda
 ``` bash
-    # download
-    mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src
-    
-    cd ~/catkin_ws/src
-    git clone https://github.com/Livox-SDK/Livox-SDK2
-    cd Livox-SDK2 && mkdir build && cd build
+# download
+mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src
 
-    # cmake options, -DCMAKE_INSTALL_PREFIX is path of your conda environment
-    cmake -DCMAKE_INSTALL_PREFIX=/home/xieys/miniforge3/envs/{ENV_NAME}  ..
+git clone https://github.com/Livox-SDK/Livox-SDK2
+cd Livox-SDK2 && mkdir build && cd build
 
-    # make && make install
-    make -j60 && make install
+# cmake options, -DCMAKE_INSTALL_PREFIX is path of your conda environment
+cmake -DCMAKE_INSTALL_PREFIX=/home/xieys/miniforge3/envs/{ENV_NAME}  ..
 
-    #clone livox_ros_driver2 and put it in your catkin_ws/src. If you don not use Livox, you can skip this step by changing -DBUILD_LIVOX=OFF in CMakeLists.txt
-    cd ~/catkin_ws/src
-    git clone https://github.com/Livox-SDK/livox_ros_driver2
-    
-    cd livox_ros_driver2
+# make && make install
+make -j60 && make install
 
-    (Important)(****NOTE, I have chaned the source code in livox_ros_driver2/CMakeLists.txt to support build. Please refer to my video in this operation.)
+#clone livox_ros_driver2 and put it in your catkin_ws/src. If you don not use Livox, you can skip this step by changing -DBUILD_LIVOX=OFF in CMakeLists.txt
+cd ~/catkin_ws/src
+git clone https://github.com/Livox-SDK/livox_ros_driver2
 
-    ./build.sh ROS1
+cd livox_ros_driver2
+
+(Important)(****NOTE, I have chaned the source code in livox_ros_driver2/CMakeLists.txt to support build. Please refer to the video in this operation.)
+
+./build.sh ROS1
 ```
 
 2.3 (Important) Install Torch
 ``` Bash
-    mamba search pytorch=2.0.1
+mamba search pytorch=2.0.1
 
-    # Please find appropriate version of torch in different channels
-    mamba install pytorch=2.0.1=gpu_cuda118py39he342708_0 cudatoolkit=11.8 -c nvidia -c conda-forge
+# Please find appropriate version of torch in different channels
+mamba install pytorch=2.0.1 -c pytorch -c nvidia -c conda-forge
 ```
 
 2.4 Some packages can be installed by:
 ``` Bash
-    mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src
+mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src
 
-    # clone
-    git clone https://github.com/xieyuser/GS-LIVOM.git
-    
-    # create env
-    mamba create -n {ENV_NAME} python=3.9
-    mamba activate {ENV_NAME}
+# clone
+git clone https://github.com/xieyuser/GS-LIVOM.git
 
-    # install ros in conda
-    mamba install ros-noetic-desktop-full -c RoboStack
-
-    # install other packages
-    cd GS-LIVOM
-    mamba install --file conda_pkgs.txt
+# install other packages
+cd GS-LIVOM
+mamba install --file conda_pkgs.txt -c nvidia -c pytorch -c conda-forge
 ```
 
 ## 3. Build GS-LIVOM and Source
 Clone the repository and catkin_make:
 ``` Bash
-    # build
-    cd ~/catkin_ws
-    catkin build   # change some DEFINITIONS
+# build
+cd ~/catkin_ws
+catkin build   # change some DEFINITIONS
 
-    # source
-    # (either) temporary
-    source ~/catkin_ws/devel/setup.bash
+# source
+# (either) temporary
+source ~/catkin_ws/devel/setup.bash
 
-    # (or) start with conda activate
-    echo "ROS_FILE=/home/xieys/catkin_ws/devel/setup.bash
-    if [ -f \"\$ROS_FILE\" ]; then
-        echo \$ROS_FILE
-        source \$ROS_FILE
-    fi" >> ~/miniforge3/envs/{ENV_NAME}/setup.sh
+# (or) start with conda activate
+echo "ROS_FILE=/home/xieys/catkin_ws/devel/setup.bash
+if [ -f \"\$ROS_FILE\" ]; then
+    echo \$ROS_FILE
+    source \$ROS_FILE
+fi" >> ~/miniforge3/envs/{ENV_NAME}/setup.sh
 ```
 
 
 ## 4.Run on Public Datasets
+
+```Bash
+# change the path in  line 40 of /home/xieys/catkin_ws/src/GS-LIVOM/include/gs/gs/parameters.cuh
+std::filesystem::path output_path = "/home/xieys/catkin_ws/output";
+```
 
 Noted:
 
