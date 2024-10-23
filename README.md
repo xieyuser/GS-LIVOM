@@ -1,4 +1,4 @@
-# GS-LIVOM: Real-time Gaussian Splatting Assisted LiDAR-Inertial-Visual Odometry and Dense Mapping
+# GS-LIVM: Real-Time Photo-Realistic LiDAR-Inertial-Visual Mapping with Gaussian Splatting
 
 ## Features
 
@@ -100,14 +100,14 @@ mamba install pytorch=2.0.1 -c conda-forge
 mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src
 
 # clone
-git clone https://github.com/xieyuser/GS-LIVOM.git
+git clone https://github.com/xieyuser/GS-LIVM.git
 
 # install other packages
-cd GS-LIVOM
+cd GS-LIVM
 mamba install --file conda_pkgs.txt -c nvidia -c pytorch -c conda-forge
 ```
 
-## 3. Build GS-LIVOM and Source
+## 3. Build GS-LIVM and Source
 Clone the repository and catkin_make:
 ``` Bash
 # build
@@ -130,7 +130,7 @@ fi" >> ~/miniforge3/envs/{ENV_NAME}/setup.sh
 ## 4.Run on Public Datasets
 
 ```Bash
-# Noted: change the path in  line 40 of /home/xieys/catkin_ws/src/GS-LIVOM/include/gs/gs/parameters.cuh
+# Noted: change the path in  line 40 of /home/xieys/catkin_ws/src/GS-LIVM/include/gs/gs/parameters.cuh
 std::filesystem::path output_path = "/home/xieys/catkin_ws/output";
 ```
 
@@ -174,7 +174,7 @@ roslaunch gslivom livo_fastlivo.launch
 
 ###  4). Run on [*Botanic Garden Dataset*](https://github.com/robot-pesg/BotanicGarden)
 
-Please go to the workspace of **GS-LIVOM** and type:
+Please go to the workspace of **GS-LIVM** and type:
 
 ```bash
 # for Velodyne VLP-16
@@ -190,8 +190,19 @@ Please refer to [Gaussian-Splatting-Cuda](https://github.com/MrNeRF/gaussian-spl
 ## Acknowledgments
 
 Thanks for [RoboStack](https://robostack.github.io/GettingStarted.html), [3D Gaussian Splatting](https://github.com/graphdeco-inria/gaussian-splatting), [Gaussian-Splatting-Cuda](https://github.com/MrNeRF/gaussian-splatting-cuda), [depth-diff-gaussian-rasterization
-](https://github.com/ingra14m/depth-diff-gaussian-rasterization), [R3LIVE](https://github.com/hku-mars/r3live), [CT-ICP](https://github.com/jedeschaud/ct_icp), [Fast-LIO](https://github.com/hku-mars/FAST_LIO) and [Open-VINS](https://github.com/rpng/open_vins).
+](https://github.com/ingra14m/depth-diff-gaussian-rasterization), [R3LIVE](https://github.com/hku-mars/r3live), [CT-ICP](https://github.com/jedeschaud/ct_icp), [sr_livo](https://github.com/ZikangYuan/sr_livo), [Fast-LIO](https://github.com/hku-mars/FAST_LIO) and [Open-VINS](https://github.com/rpng/open_vins).
 
+
+## Citation
+```
+@article{xie2024gslivm,
+  title={GS-LIVM: Real-Time Photo-Realistic LiDAR-Inertial-Visual Mapping with Gaussian Splatting},
+  author={Xie, Yusen and Huang, Zhenmin and Wu, Jin and Ma, Jun},
+  journal={arXiv preprint arXiv:2410.17084},
+  year={2024}
+}
+```
 
 ## License
 The source code of this package is released under GPLv2 license. We only allow it free for academic usage. For any technical issues, please feel free to contact yxie827@connect.hkust-gz.edu.cn.
+
