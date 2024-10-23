@@ -1,4 +1,6 @@
-# GS-LIVM: Real-Time Photo-Realistic LiDAR-Inertial-Visual Mapping with Gaussian Splatting
+# GS-LIVM: Real-Time Photo-Realistic LiDAR-Inertial-Visual Mapping with Gaussian Splatting  (include & src are coming soon!)
+
+[Paper](https://arxiv.org/pdf/2410.17084)
 
 ## Features
 
@@ -13,7 +15,7 @@ D. Variance centerd Framework is developed to calculate the initialization param
 E. Easy-to-use. ROS-related code is provided. Any bags contains image, LiDAR points, IMU can be processed.
 
 
-## 1.Overview and Contributions (2024-10-01 Update)
+## 1.Overview and Contributions (2024-10-23 Update)
 The system takes input from point cloud data collected by LiDAR, motion information collected by an Inertial Measurement Unit (IMU), and color and texture information captured by a camera. In the tracking thread, the ESIKF algorithm is used for tracking, achieving odometry output at the IMU frequency. In the mapping thread, the rendered color point cloud is used for Voxel-GPR, and then the data initialized 3D gaussian is input into the dense 3D gaussian map for rendering optimization. The final output is a high-quality dense 3D gaussian map. C, D, and S represent the rasterized color image, depth image, and silhouette image, respectively.
 
 <div align="center">
@@ -196,7 +198,7 @@ Thanks for [RoboStack](https://robostack.github.io/GettingStarted.html), [3D Gau
 ## Citation
 ```
 @article{xie2024gslivm,
-  title={GS-LIVM: Real-Time Photo-Realistic LiDAR-Inertial-Visual Mapping with Gaussian Splatting},
+  title={{GS-LIVM: Real-Time Photo-Realistic LiDAR-Inertial-Visual Mapping with Gaussian Splatting}},
   author={Xie, Yusen and Huang, Zhenmin and Wu, Jin and Ma, Jun},
   journal={arXiv preprint arXiv:2410.17084},
   year={2024}
